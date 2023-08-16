@@ -1,0 +1,1 @@
+{"version":3,"file":"index.css","mappings":";;;AAAA;EACC;AACD,C","sources":["webpack://iconic-block/./src/editor.scss"],"sourcesContent":[".wp-block-create-block-iconic-block {\n\tborder: 1px dotted rgb(1, 1, 1);\n}\n\n"],"names":[],"sourceRoot":""}

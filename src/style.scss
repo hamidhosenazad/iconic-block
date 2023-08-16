@@ -1,0 +1,22 @@
+.wp-block-iconic-block {
+	padding: 20px !important;
+	margin: 0;
+
+	&.wp-block-iconic-block-align-right {
+		text-align: right;
+	}
+
+	&.wp-block-iconic-block-align-left {
+		text-align: left;
+	}
+
+	&.wp-block-iconic-block-align-center {
+		text-align: center !important;
+	}
+}
+
+.wp-block-iconic-block-button {
+	background-color: #000;
+	padding: 10px;
+	color: #fff;
+}
