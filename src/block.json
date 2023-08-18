@@ -22,8 +22,16 @@
 			"default": "left"
 		},
 		"label": {
-			"type": "string",
-			"source": "html"
+			"type": "string"
+		},
+		"rel": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string"
+		},
+		"htmlAnchor": {
+			"type": "string"
 		}
 	}
 }

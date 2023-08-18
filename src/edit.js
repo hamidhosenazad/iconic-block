@@ -29,29 +29,78 @@ import { PanelBody, TextControl } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { alignment, label } = attributes;
+	const { alignment, label, rel, title, htmlAnchor } = attributes;
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
 	};
 	const onChangeLabel = ( newLabel ) => {
 		setAttributes( { label: newLabel } );
 	};
+	const onChangeRel = ( newRel ) => {
+		setAttributes( { rel: newRel } );
+	};
+	const onChangeTitle = ( newTitle ) => {
+		setAttributes( { title: newTitle } );
+	};
+	const onChangeHtmlAnchor = ( newHtmlAnchor ) => {
+		setAttributes( { htmlAnchor: newHtmlAnchor } );
+	};
 	return (
 		<>
-			<InspectorControls>
+			<InspectorControls group="settings">
 				<PanelBody>
 					<TextControl
 						label={ __( 'Label', 'iconic-block' ) }
-						value={ label }
+						value={ label || '' }
 						onChange={ onChangeLabel }
 						help={ __(
 							'Briefly describe the icon to help screen reader users.',
 							'Iconic-block'
 						) }
 					/>
+					<TextControl
+						label={ __( 'REL', 'iconic-block' ) }
+						value={ rel || '' }
+						onChange={ onChangeRel }
+						help={ __(
+							'Rel attribute for the icon',
+							'Iconic-block'
+						) }
+					/>
+					<TextControl
+						label={ __( 'TITLE', 'iconic-block' ) }
+						value={ title || '' }
+						onChange={ onChangeTitle }
+						help={ __(
+							'Describe the role of this icon on the page',
+							'Iconic-block'
+						) }
+					/>
+					<TextControl
+						label={ __( 'HTML ANCHOR', 'iconic-block' ) }
+						value={ htmlAnchor || '' }
+						onChange={ onChangeHtmlAnchor }
+						help={ __(
+							'Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page',
+							'Iconic-block'
+						) }
+					/>
 				</PanelBody>
 			</InspectorControls>
 
+			<InspectorControls group="styles">
+				<PanelBody>
+					<TextControl
+						label={ __( 'HTML ANCHOR', 'iconic-block' ) }
+						value={ htmlAnchor || '' }
+						onChange={ onChangeHtmlAnchor }
+						help={ __(
+							'Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page',
+							'Iconic-block'
+						) }
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<BlockControls>
 				<AlignmentToolbar
 					value={ alignment }

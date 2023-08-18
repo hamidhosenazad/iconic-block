@@ -50,27 +50,74 @@ function Edit({
   setAttributes
 }) {
   const {
-    alignment
+    alignment,
+    label,
+    rel,
+    title,
+    htmlAnchor
   } = attributes;
   const onChangeAlignment = newAlignment => {
     setAttributes({
       alignment: newAlignment
     });
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  const onChangeLabel = newLabel => {
+    setAttributes({
+      label: newLabel
+    });
+  };
+  const onChangeRel = newRel => {
+    setAttributes({
+      rel: newRel
+    });
+  };
+  const onChangeTitle = newTitle => {
+    setAttributes({
+      title: newTitle
+    });
+  };
+  const onChangeHtmlAnchor = newHtmlAnchor => {
+    setAttributes({
+      htmlAnchor: newHtmlAnchor
+    });
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    group: "settings"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Label', 'iconic-block'),
-    value: attributes.label,
-    onChange: value => setAttributes({
-      label: value
-    }),
+    value: label || '',
+    onChange: onChangeLabel,
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Briefly describe the icon to help screen reader users.', 'Iconic-block')
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('REL', 'iconic-block'),
+    value: rel || '',
+    onChange: onChangeRel,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Rel attribute for the icon', 'Iconic-block')
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('TITLE', 'iconic-block'),
+    value: title || '',
+    onChange: onChangeTitle,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Describe the role of this icon on the page', 'Iconic-block')
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('HTML ANCHOR', 'iconic-block'),
+    value: htmlAnchor || '',
+    onChange: onChangeHtmlAnchor,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page', 'Iconic-block')
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    group: "styles"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('HTML ANCHOR', 'iconic-block'),
+    value: htmlAnchor || '',
+    onChange: onChangeHtmlAnchor,
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page', 'Iconic-block')
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
     value: alignment,
     onChange: onChangeAlignment
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
       className: `wp-block-iconic-block wp-block-iconic-block-align-${alignment}`
-    })
+    }),
+    title: label
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Pick an icon from the library', 'iconic-block')), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     className: "wp-block-iconic-block-button"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Icon Library', 'iconic-block'))));
@@ -243,7 +290,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{"type":"string"},"rel":{"type":"string"},"title":{"type":"string"},"htmlAnchor":{"type":"string"}}}');
 
 /***/ })
 
