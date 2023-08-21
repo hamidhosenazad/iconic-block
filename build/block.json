@@ -9,7 +9,11 @@
   "description": "Add icon to your site editor.",
   "example": {},
   "supports": {
-    "html": false
+    "html": false,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
   },
   "textdomain": "iconic-block",
   "editorScript": "file:./index.js",
@@ -31,6 +35,12 @@
       "type": "string"
     },
     "htmlAnchor": {
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "iconColor": {
       "type": "string"
     }
   }

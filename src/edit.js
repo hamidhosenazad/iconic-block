@@ -16,6 +16,8 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 	InspectorControls,
+	PanelColorSettings,
+	ContrastChecker,
 } from '@wordpress/block-editor';
 
 import { PanelBody, TextControl } from '@wordpress/components';
@@ -29,7 +31,15 @@ import { PanelBody, TextControl } from '@wordpress/components';
 import './editor.scss';
 
 export default function Edit( { attributes, setAttributes } ) {
-	const { alignment, label, rel, title, htmlAnchor } = attributes;
+	const {
+		alignment,
+		label,
+		rel,
+		title,
+		htmlAnchor,
+		backgroundColor,
+		iconColor,
+	} = attributes;
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
 	};
@@ -45,10 +55,16 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onChangeHtmlAnchor = ( newHtmlAnchor ) => {
 		setAttributes( { htmlAnchor: newHtmlAnchor } );
 	};
+	const onBackgroundColorChange = ( newBackgroundColor ) => {
+		setAttributes( { backgroundColor: newBackgroundColor } );
+	};
+	const onChangeIconColor = ( newIconColor ) => {
+		setAttributes( { iconColor: newIconColor } );
+	};
 	return (
 		<>
 			<InspectorControls group="settings">
-				<PanelBody>
+				<PanelBody title={ __( 'Settings', 'iconic-block' ) }>
 					<TextControl
 						label={ __( 'Label', 'iconic-block' ) }
 						value={ label || '' }
@@ -89,17 +105,28 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<InspectorControls group="styles">
-				<PanelBody>
-					<TextControl
-						label={ __( 'HTML ANCHOR', 'iconic-block' ) }
-						value={ htmlAnchor || '' }
-						onChange={ onChangeHtmlAnchor }
-						help={ __(
-							'Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page',
-							'Iconic-block'
-						) }
+				<PanelColorSettings
+					title={ __( 'Color', 'iconic-block' ) }
+					initialOpen
+					disableCustomColors={ false }
+					colorSettings={ [
+						{
+							value: iconColor,
+							onChange: onChangeIconColor,
+							label: __( 'Icon Color', 'iconic-block' ),
+						},
+						{
+							value: backgroundColor,
+							onChange: onBackgroundColorChange,
+							label: __( 'Background Color', 'iconic-block' ),
+						},
+					] }
+				>
+					<ContrastChecker
+						iconColor={ iconColor }
+						backgroundColor={ backgroundColor }
 					/>
-				</PanelBody>
+				</PanelColorSettings>
 			</InspectorControls>
 			<BlockControls>
 				<AlignmentToolbar

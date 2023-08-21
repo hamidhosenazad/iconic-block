@@ -54,7 +54,9 @@ function Edit({
     label,
     rel,
     title,
-    htmlAnchor
+    htmlAnchor,
+    backgroundColor,
+    iconColor
   } = attributes;
   const onChangeAlignment = newAlignment => {
     setAttributes({
@@ -81,9 +83,21 @@ function Edit({
       htmlAnchor: newHtmlAnchor
     });
   };
+  const onBackgroundColorChange = newBackgroundColor => {
+    setAttributes({
+      backgroundColor: newBackgroundColor
+    });
+  };
+  const onChangeIconColor = newIconColor => {
+    setAttributes({
+      iconColor: newIconColor
+    });
+  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
     group: "settings"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Settings', 'iconic-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Label', 'iconic-block'),
     value: label || '',
     onChange: onChangeLabel,
@@ -105,11 +119,22 @@ function Edit({
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page', 'Iconic-block')
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
     group: "styles"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
-    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('HTML ANCHOR', 'iconic-block'),
-    value: htmlAnchor || '',
-    onChange: onChangeHtmlAnchor,
-    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page', 'Iconic-block')
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.PanelColorSettings, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Color', 'iconic-block'),
+    initialOpen: true,
+    disableCustomColors: false,
+    colorSettings: [{
+      value: iconColor,
+      onChange: onChangeIconColor,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Icon Color', 'iconic-block')
+    }, {
+      value: backgroundColor,
+      onChange: onBackgroundColorChange,
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Background Color', 'iconic-block')
+    }]
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ContrastChecker, {
+    iconColor: iconColor,
+    backgroundColor: backgroundColor
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
     value: alignment,
     onChange: onChangeAlignment
@@ -290,7 +315,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{"type":"string"},"rel":{"type":"string"},"title":{"type":"string"},"htmlAnchor":{"type":"string"}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true}},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{"type":"string"},"rel":{"type":"string"},"title":{"type":"string"},"htmlAnchor":{"type":"string"},"backgroundColor":{"type":"string"},"iconColor":{"type":"string"}}}');
 
 /***/ })
 
