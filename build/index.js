@@ -56,7 +56,10 @@ function Edit({
     title,
     htmlAnchor,
     backgroundColor,
-    iconColor
+    iconColor,
+    width,
+    height,
+    rotate
   } = attributes;
   const onChangeAlignment = newAlignment => {
     setAttributes({
@@ -91,6 +94,16 @@ function Edit({
   const onChangeIconColor = newIconColor => {
     setAttributes({
       iconColor: newIconColor
+    });
+  };
+  const onChangeWidth = newWidth => {
+    setAttributes({
+      width: newWidth
+    });
+  };
+  const onChangeHeight = newHeight => {
+    setAttributes({
+      height: newHeight
     });
   };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
@@ -135,10 +148,27 @@ function Edit({
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.ContrastChecker, {
     iconColor: iconColor,
     backgroundColor: backgroundColor
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalDimensionControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Width', 'iconic-block'),
+    value: width,
+    onChange: onChangeWidth
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalDimensionControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Height', 'iconic-block'),
+    value: height,
+    onChange: onChangeHeight
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.AlignmentToolbar, {
     value: alignment,
     onChange: onChangeAlignment
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
+    name: "link",
+    icon: "admin-links",
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Link', 'icon-block')
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, {
+    className: `outermost-icon-block__rotate-button-${rotate}`,
+    icon: "image-rotate-right",
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Rotate', 'icon-block'),
+    isPressed: rotate
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarButton, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Icon Library', 'icon-block')))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
       className: `wp-block-iconic-block wp-block-iconic-block-align-${alignment}`
     }),
@@ -315,7 +345,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true}},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{"type":"string"},"rel":{"type":"string"},"title":{"type":"string"},"htmlAnchor":{"type":"string"},"backgroundColor":{"type":"string"},"iconColor":{"type":"string"}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/iconic-block","version":"0.1.0","title":"Iconic Block","category":"media","icon":"smiley","description":"Add icon to your site editor.","example":{},"supports":{"html":false,"spacing":{"margin":true,"padding":true},"dimensions":{"minWidth":true},"__experimentalBorder":{"color":true,"style":true,"width":true,"default":true,"__experimentalSelector":".icon-container","__experimentalSkipSerialization":true,"__experimentalDefaultControls":{"color":false,"radius":false,"style":false,"width":false}}},"textdomain":"iconic-block","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"alignment":{"type":"string","default":"left"},"label":{"type":"string"},"rel":{"type":"string"},"title":{"type":"string"},"htmlAnchor":{"type":"string"},"backgroundColor":{"type":"string"},"iconColor":{"type":"string"},"width":{"type":"string"},"height":{"type":"string"},"rotate":{"type":"string"},"link":{"type":"string"}}}');
 
 /***/ })
 

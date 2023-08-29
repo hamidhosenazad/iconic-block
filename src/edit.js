@@ -20,7 +20,13 @@ import {
 	ContrastChecker,
 } from '@wordpress/block-editor';
 
-import { PanelBody, TextControl } from '@wordpress/components';
+import {
+	PanelBody,
+	TextControl,
+	__experimentalDimensionControl as DimensionControl, // eslint-disable-line
+	ToolbarButton,
+	ToolbarGroup,
+} from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -39,6 +45,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		htmlAnchor,
 		backgroundColor,
 		iconColor,
+		width,
+		height,
+		rotate,
 	} = attributes;
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
@@ -61,6 +70,12 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onChangeIconColor = ( newIconColor ) => {
 		setAttributes( { iconColor: newIconColor } );
 	};
+	const onChangeWidth = ( newWidth ) => {
+		setAttributes( { width: newWidth } );
+	};
+	const onChangeHeight = ( newHeight ) => {
+		setAttributes( { height: newHeight } );
+	};
 	return (
 		<>
 			<InspectorControls group="settings">
@@ -74,6 +89,7 @@ export default function Edit( { attributes, setAttributes } ) {
 							'Iconic-block'
 						) }
 					/>
+
 					<TextControl
 						label={ __( 'REL', 'iconic-block' ) }
 						value={ rel || '' }
@@ -127,12 +143,44 @@ export default function Edit( { attributes, setAttributes } ) {
 						backgroundColor={ backgroundColor }
 					/>
 				</PanelColorSettings>
+				<PanelBody>
+					<DimensionControl
+						label={ __( 'Width', 'iconic-block' ) }
+						value={ width }
+						onChange={ onChangeWidth }
+					/>
+					<DimensionControl
+						label={ __( 'Height', 'iconic-block' ) }
+						value={ height }
+						onChange={ onChangeHeight }
+					/>
+				</PanelBody>
 			</InspectorControls>
 			<BlockControls>
 				<AlignmentToolbar
 					value={ alignment }
 					onChange={ onChangeAlignment }
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						name="link"
+						icon="admin-links"
+						title={ __( 'Link', 'icon-block' ) }
+					/>
+				</ToolbarGroup>
+				<ToolbarGroup>
+					<ToolbarButton
+						className={ `outermost-icon-block__rotate-button-${ rotate }` }
+						icon="image-rotate-right"
+						label={ __( 'Rotate', 'icon-block' ) }
+						isPressed={ rotate }
+					/>
+				</ToolbarGroup>
+				<ToolbarGroup>
+					<ToolbarButton>
+						{ __( 'Icon Library', 'icon-block' ) }
+					</ToolbarButton>
+				</ToolbarGroup>
 			</BlockControls>
 			<div
 				{ ...useBlockProps( {

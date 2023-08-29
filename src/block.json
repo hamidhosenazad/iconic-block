@@ -13,6 +13,23 @@
 		"spacing": {
 			"margin": true,
 			"padding": true
+		},
+		"dimensions": {
+			"minWidth": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"style": true,
+			"width": true,
+			"default": true,
+			"__experimentalSelector": ".icon-container",
+			"__experimentalSkipSerialization": true,
+			"__experimentalDefaultControls": {
+				"color": false,
+				"radius": false,
+				"style": false,
+				"width": false
+			}
 		}
 	},
 	"textdomain": "iconic-block",
@@ -41,6 +58,18 @@
 			"type": "string"
 		},
 		"iconColor": {
+			"type": "string"
+		},
+		"width": {
+			"type": "string"
+		},
+		"height": {
+			"type": "string"
+		},
+		"rotate": {
+			"type": "string"
+		},
+		"link": {
 			"type": "string"
 		}
 	}
