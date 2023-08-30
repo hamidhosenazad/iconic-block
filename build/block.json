@@ -60,17 +60,15 @@
     "iconColor": {
       "type": "string"
     },
-    "width": {
-      "type": "string"
-    },
-    "height": {
-      "type": "string"
-    },
     "rotate": {
       "type": "string"
     },
     "link": {
       "type": "string"
+    },
+    "iconSize": {
+      "type": "number",
+      "default": "40"
     }
   }
 }

@@ -28,6 +28,8 @@ import {
 	ToolbarGroup,
 } from '@wordpress/components';
 
+import { EmojiSmile } from 'react-bootstrap-icons';
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -45,9 +47,8 @@ export default function Edit( { attributes, setAttributes } ) {
 		htmlAnchor,
 		backgroundColor,
 		iconColor,
-		width,
-		height,
 		rotate,
+		iconSize,
 	} = attributes;
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
@@ -70,12 +71,10 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onChangeIconColor = ( newIconColor ) => {
 		setAttributes( { iconColor: newIconColor } );
 	};
-	const onChangeWidth = ( newWidth ) => {
-		setAttributes( { width: newWidth } );
+	const onChangeSize = ( newIconColor ) => {
+		setAttributes( { iconSize: newIconColor } );
 	};
-	const onChangeHeight = ( newHeight ) => {
-		setAttributes( { height: newHeight } );
-	};
+
 	return (
 		<>
 			<InspectorControls group="settings">
@@ -121,6 +120,11 @@ export default function Edit( { attributes, setAttributes } ) {
 			</InspectorControls>
 
 			<InspectorControls group="styles">
+				<TextControl
+					label={ __( 'Size', 'iconic-block' ) }
+					value={ iconSize }
+					onChange={ onChangeSize }
+				/>
 				<PanelColorSettings
 					title={ __( 'Color', 'iconic-block' ) }
 					initialOpen
@@ -143,18 +147,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						backgroundColor={ backgroundColor }
 					/>
 				</PanelColorSettings>
-				<PanelBody>
-					<DimensionControl
-						label={ __( 'Width', 'iconic-block' ) }
-						value={ width }
-						onChange={ onChangeWidth }
-					/>
-					<DimensionControl
-						label={ __( 'Height', 'iconic-block' ) }
-						value={ height }
-						onChange={ onChangeHeight }
-					/>
-				</PanelBody>
+				<PanelBody></PanelBody>
 			</InspectorControls>
 			<BlockControls>
 				<AlignmentToolbar
@@ -188,10 +181,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				} ) }
 				title={ label }
 			>
-				<p>{ __( 'Pick an icon from the library', 'iconic-block' ) }</p>
-				<button className="wp-block-iconic-block-button">
-					{ __( 'Icon Library', 'iconic-block' ) }
-				</button>
+				<EmojiSmile size={ iconSize } color="red" />
 			</div>
 		</>
 	);

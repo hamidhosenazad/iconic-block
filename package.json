@@ -27,5 +27,9 @@
 		"eslint-config-prettier": "^9.0.0",
 		"husky": "^8.0.3",
 		"stylelint": "^14.16.1"
+	},
+	"dependencies": {
+		"bootstrap-icons": "^1.10.5",
+		"react-bootstrap-icons": "^1.10.3"
 	}
 }
