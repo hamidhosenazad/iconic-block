@@ -28,7 +28,9 @@ import {
 	ToolbarGroup,
 } from '@wordpress/components';
 
-import { EmojiSmile } from 'react-bootstrap-icons';
+import * as BootstrapIcons from 'react-bootstrap-icons';
+
+import Modal from 'react-modal';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -37,6 +39,19 @@ import { EmojiSmile } from 'react-bootstrap-icons';
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+
+const customStyles = {
+	content: {
+		top: '50%',
+		left: '50%',
+		right: 'auto',
+		bottom: 'auto',
+		marginRight: '-50%',
+		transform: 'translate(-50%, -50%)',
+		backgroundColor: 'white',
+		width: 600,
+	},
+};
 
 export default function Edit( { attributes, setAttributes } ) {
 	const {
@@ -49,7 +64,11 @@ export default function Edit( { attributes, setAttributes } ) {
 		iconColor,
 		rotate,
 		iconSize,
+		modalOpen = false,
 	} = attributes;
+	const setModalOpen = ( newVal ) => {
+		setAttributes( { modalOpen: newVal } );
+	};
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
 	};
@@ -181,7 +200,298 @@ export default function Edit( { attributes, setAttributes } ) {
 				} ) }
 				title={ label }
 			>
-				<EmojiSmile size={ iconSize } color="red" />
+				<BootstrapIcons.HeartFill color="red" size={ 24 } />
+			</div>
+			<div className="App">
+				<button onClick={ setModalOpen }>Open Modal</button>
+				<Modal
+					isOpen={ modalOpen }
+					onRequestClose={ () => setModalOpen( false ) }
+					style={ customStyles }
+				>
+					<div>
+						<input type="text" placeholder="Search..." value="12" />
+						<button
+							onClick={ () => setModalOpen( false ) }
+							style={ { float: 'right', marginRight: '10px' } }
+						>
+							X
+						</button>
+					</div>
+					<div
+						style={ {
+							display: 'flex',
+							flexWrap: 'wrap',
+							paddingTop: '5%',
+						} }
+					>
+						{ /* HeartFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.HeartFill size={ 24 } />
+							<div>HeartFill</div>
+						</div>
+
+						{ /* StarFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.StarFill size={ 24 } />
+							<div>StarFill</div>
+						</div>
+
+						{ /* BookFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.BookFill size={ 24 } />
+							<div>BookFill</div>
+						</div>
+
+						{ /* MusicPlayerFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.MusicPlayerFill size={ 24 } />
+							<div>MusicPlayerFill</div>
+						</div>
+
+						{ /* AlarmFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.AlarmFill size={ 24 } />
+							<div>AlarmFill</div>
+						</div>
+
+						{ /* CalendarFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.CalendarFill size={ 24 } />
+							<div>CalendarFill</div>
+						</div>
+
+						{ /* ChatFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.ChatFill size={ 24 } />
+							<div>ChatFill</div>
+						</div>
+
+						{ /* CameraVideoFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.CameraVideoFill size={ 24 } />
+							<div>CameraVideoFill</div>
+						</div>
+
+						{ /* FileEarmarkFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.FileEarmarkFill size={ 24 } />
+							<div>FileEarmarkFill</div>
+						</div>
+
+						{ /* LockFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.LockFill size={ 24 } />
+							<div>LockFill</div>
+						</div>
+
+						{ /* UnlockFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.UnlockFill size={ 24 } />
+							<div>UnlockFill</div>
+						</div>
+
+						{ /* PlayFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.PlayFill size={ 24 } />
+							<div>PlayFill</div>
+						</div>
+
+						{ /* PauseFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.PauseFill size={ 24 } />
+							<div>PauseFill</div>
+						</div>
+
+						{ /* StopFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.StopFill size={ 24 } />
+							<div>StopFill</div>
+						</div>
+
+						{ /* RecordFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.RecordFill size={ 24 } />
+							<div>RecordFill</div>
+						</div>
+
+						{ /* SkipStartFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.SkipStartFill size={ 24 } />
+							<div>SkipStartFill</div>
+						</div>
+
+						{ /* SkipEndFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.SkipEndFill size={ 24 } />
+							<div>SkipEndFill</div>
+						</div>
+
+						{ /* ArrowUpCircleFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.ArrowUpCircleFill size={ 24 } />
+							<div>ArrowUpCircleFill</div>
+						</div>
+
+						{ /* ArrowDownCircleFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.ArrowDownCircleFill size={ 24 } />
+							<div>ArrowDownCircleFill</div>
+						</div>
+
+						{ /* ArrowLeftCircleFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.ArrowLeftCircleFill size={ 24 } />
+							<div>ArrowLeftCircleFill</div>
+						</div>
+
+						{ /* ArrowRightCircleFill */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.ArrowRightCircleFill size={ 24 } />
+							<div>ArrowRightCircleFill</div>
+						</div>
+
+						{ /* Search */ }
+						<div
+							style={ {
+								flexBasis: '25%',
+								padding: '10px',
+								textAlign: 'center',
+							} }
+						>
+							<BootstrapIcons.AirplaneEnginesFill size={ 24 } />
+							<div>Search</div>
+						</div>
+
+						{ /* Add more icons here */ }
+					</div>
+				</Modal>
 			</div>
 		</>
 	);
