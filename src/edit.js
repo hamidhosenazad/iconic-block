@@ -65,6 +65,7 @@ export default function Edit( { attributes, setAttributes } ) {
 		rotate,
 		iconSize,
 		modalOpen = false,
+		suggestions = [],
 	} = attributes;
 	const setModalOpen = ( newVal ) => {
 		setAttributes( { modalOpen: newVal } );
@@ -92,6 +93,22 @@ export default function Edit( { attributes, setAttributes } ) {
 	};
 	const onChangeSize = ( newIconColor ) => {
 		setAttributes( { iconSize: newIconColor } );
+	};
+	const onSearchInputChange = ( newSearchInput ) => {
+		const filteredIcons = filterBootstrapIcons( newSearchInput );
+		setAttributes( { suggestions: filteredIcons } );
+	};
+
+	const filterBootstrapIcons = ( inputValue ) => {
+		const filteredIcons = Object.keys( BootstrapIcons )
+			.filter( ( iconName ) =>
+				iconName.toLowerCase().includes( inputValue.toLowerCase() )
+			)
+			.map( ( iconName ) => ( {
+				iconName,
+				IconComponent: BootstrapIcons[ iconName ], // Get the icon component
+			} ) );
+		return filteredIcons;
 	};
 
 	return (
@@ -189,7 +206,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</ToolbarGroup>
 				<ToolbarGroup>
-					<ToolbarButton>
+					<ToolbarButton onClick={ setModalOpen }>
 						{ __( 'Icon Library', 'icon-block' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
@@ -202,297 +219,48 @@ export default function Edit( { attributes, setAttributes } ) {
 			>
 				<BootstrapIcons.HeartFill color="red" size={ 24 } />
 			</div>
-			<div className="App">
-				<button onClick={ setModalOpen }>Open Modal</button>
-				<Modal
-					isOpen={ modalOpen }
-					onRequestClose={ () => setModalOpen( false ) }
-					style={ customStyles }
+			<Modal
+				isOpen={ modalOpen }
+				onRequestClose={ () => setModalOpen( false ) }
+				style={ customStyles }
+			>
+				<div>
+					<input
+						type="text"
+						placeholder="Search..."
+						onChange={ ( e ) =>
+							onSearchInputChange( e.target.value )
+						}
+					/>
+					<button
+						onClick={ () => setModalOpen( false ) }
+						style={ { float: 'right', marginRight: '10px' } }
+					>
+						X
+					</button>
+				</div>
+				<div
+					style={ {
+						display: 'flex',
+						flexWrap: 'wrap',
+						paddingTop: '5%',
+					} }
 				>
 					<div>
-						<input type="text" placeholder="Search..." value="12" />
-						<button
-							onClick={ () => setModalOpen( false ) }
-							style={ { float: 'right', marginRight: '10px' } }
-						>
-							X
-						</button>
+						{ /* Render icon suggestions here */ }
+						{ suggestions.map( ( icon, index ) => (
+							<div key={ index }>
+								<icon.IconComponent
+									color={ iconColor }
+									size={ iconSize }
+								/>
+								{ icon.iconName }
+							</div>
+						) ) }
 					</div>
-					<div
-						style={ {
-							display: 'flex',
-							flexWrap: 'wrap',
-							paddingTop: '5%',
-						} }
-					>
-						{ /* HeartFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.HeartFill size={ 24 } />
-							<div>HeartFill</div>
-						</div>
-
-						{ /* StarFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.StarFill size={ 24 } />
-							<div>StarFill</div>
-						</div>
-
-						{ /* BookFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.BookFill size={ 24 } />
-							<div>BookFill</div>
-						</div>
-
-						{ /* MusicPlayerFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.MusicPlayerFill size={ 24 } />
-							<div>MusicPlayerFill</div>
-						</div>
-
-						{ /* AlarmFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.AlarmFill size={ 24 } />
-							<div>AlarmFill</div>
-						</div>
-
-						{ /* CalendarFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.CalendarFill size={ 24 } />
-							<div>CalendarFill</div>
-						</div>
-
-						{ /* ChatFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.ChatFill size={ 24 } />
-							<div>ChatFill</div>
-						</div>
-
-						{ /* CameraVideoFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.CameraVideoFill size={ 24 } />
-							<div>CameraVideoFill</div>
-						</div>
-
-						{ /* FileEarmarkFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.FileEarmarkFill size={ 24 } />
-							<div>FileEarmarkFill</div>
-						</div>
-
-						{ /* LockFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.LockFill size={ 24 } />
-							<div>LockFill</div>
-						</div>
-
-						{ /* UnlockFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.UnlockFill size={ 24 } />
-							<div>UnlockFill</div>
-						</div>
-
-						{ /* PlayFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.PlayFill size={ 24 } />
-							<div>PlayFill</div>
-						</div>
-
-						{ /* PauseFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.PauseFill size={ 24 } />
-							<div>PauseFill</div>
-						</div>
-
-						{ /* StopFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.StopFill size={ 24 } />
-							<div>StopFill</div>
-						</div>
-
-						{ /* RecordFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.RecordFill size={ 24 } />
-							<div>RecordFill</div>
-						</div>
-
-						{ /* SkipStartFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.SkipStartFill size={ 24 } />
-							<div>SkipStartFill</div>
-						</div>
-
-						{ /* SkipEndFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.SkipEndFill size={ 24 } />
-							<div>SkipEndFill</div>
-						</div>
-
-						{ /* ArrowUpCircleFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.ArrowUpCircleFill size={ 24 } />
-							<div>ArrowUpCircleFill</div>
-						</div>
-
-						{ /* ArrowDownCircleFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.ArrowDownCircleFill size={ 24 } />
-							<div>ArrowDownCircleFill</div>
-						</div>
-
-						{ /* ArrowLeftCircleFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.ArrowLeftCircleFill size={ 24 } />
-							<div>ArrowLeftCircleFill</div>
-						</div>
-
-						{ /* ArrowRightCircleFill */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.ArrowRightCircleFill size={ 24 } />
-							<div>ArrowRightCircleFill</div>
-						</div>
-
-						{ /* Search */ }
-						<div
-							style={ {
-								flexBasis: '25%',
-								padding: '10px',
-								textAlign: 'center',
-							} }
-						>
-							<BootstrapIcons.AirplaneEnginesFill size={ 24 } />
-							<div>Search</div>
-						</div>
-
-						{ /* Add more icons here */ }
-					</div>
-				</Modal>
-			</div>
+					{ /* Add more icons here */ }
+				</div>
+			</Modal>
 		</>
 	);
 }
