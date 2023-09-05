@@ -67,7 +67,9 @@ export default function Edit( { attributes, setAttributes } ) {
 		iconSize,
 		modalOpen = false,
 		suggestions = [],
+		selectedIcon = 'EmojiSmile',
 	} = attributes;
+	const IconComponent = BootstrapIcons[ selectedIcon ];
 	const setModalOpen = ( newVal ) => {
 		setAttributes( { modalOpen: newVal } );
 	};
@@ -114,6 +116,9 @@ export default function Edit( { attributes, setAttributes } ) {
 				IconComponent: BootstrapIcons[ iconName ], // Get the icon component
 			} ) );
 		return filteredIcons;
+	};
+	const onChangeIcon = ( newIcon ) => {
+		setAttributes( { selectedIcon: newIcon } );
 	};
 
 	return (
@@ -212,7 +217,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</ToolbarGroup>
 				<ToolbarGroup>
 					<ToolbarButton onClick={ setModalOpen }>
-						{ __( 'Icon Library', 'icon-block' ) }
+						{ __( 'Replace Icon', 'icon-block' ) }
 					</ToolbarButton>
 				</ToolbarGroup>
 			</BlockControls>
@@ -222,7 +227,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				} ) }
 				title={ label }
 			>
-				<BootstrapIcons.HeartFill color="red" size={ 24 } />
+				<IconComponent color={ iconColor } size={ iconSize } />
 			</div>
 			<Modal
 				isOpen={ modalOpen }
@@ -274,10 +279,17 @@ export default function Edit( { attributes, setAttributes } ) {
 									boxSizing: 'border-box',
 									padding: '8px',
 								} }
+								onClick={ () => {
+									setModalOpen( false );
+									onChangeIcon( icon.iconName );
+								} }
+								onKeyDown={ onChangeIcon }
+								tabIndex={ 0 }
+								role="button"
 							>
 								{ /* Render icon suggestions here */ }
 								<icon.IconComponent
-									color={ iconColor }
+									color="#000"
 									size={ iconSize }
 								/>
 								<p>{ icon.iconName }</p>

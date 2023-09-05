@@ -69,6 +69,9 @@
     "iconSize": {
       "type": "number",
       "default": "40"
+    },
+    "selectedIcon": {
+      "type": "string"
     }
   }
 }
