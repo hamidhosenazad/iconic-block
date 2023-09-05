@@ -50,6 +50,7 @@ const customStyles = {
 		transform: 'translate(-50%, -50%)',
 		backgroundColor: 'white',
 		width: 600,
+		height: 400,
 	},
 };
 
@@ -95,8 +96,12 @@ export default function Edit( { attributes, setAttributes } ) {
 		setAttributes( { iconSize: newIconColor } );
 	};
 	const onSearchInputChange = ( newSearchInput ) => {
-		const filteredIcons = filterBootstrapIcons( newSearchInput );
-		setAttributes( { suggestions: filteredIcons } );
+		if ( newSearchInput === '' ) {
+			setAttributes( { suggestions: [] } );
+		} else {
+			const filteredIcons = filterBootstrapIcons( newSearchInput );
+			setAttributes( { suggestions: filteredIcons } );
+		}
 	};
 
 	const filterBootstrapIcons = ( inputValue ) => {
@@ -239,6 +244,7 @@ export default function Edit( { attributes, setAttributes } ) {
 						X
 					</button>
 				</div>
+
 				<div
 					style={ {
 						display: 'flex',
@@ -246,19 +252,38 @@ export default function Edit( { attributes, setAttributes } ) {
 						paddingTop: '5%',
 					} }
 				>
-					<div>
-						{ /* Render icon suggestions here */ }
-						{ suggestions.map( ( icon, index ) => (
-							<div key={ index }>
+					{ suggestions.length === 0 ? (
+						<p
+							style={ {
+								position: 'absolute',
+								top: '50%',
+								left: '50%',
+								transform: 'translate(-50%, -50%)',
+								fontSize: '36px',
+								color: 'rgba(0, 0, 0, 0.5)',
+							} }
+						>
+							No icons to display
+						</p>
+					) : (
+						suggestions.map( ( icon, index ) => (
+							<div
+								key={ index }
+								style={ {
+									flex: '0 0 33.33%',
+									boxSizing: 'border-box',
+									padding: '8px',
+								} }
+							>
+								{ /* Render icon suggestions here */ }
 								<icon.IconComponent
 									color={ iconColor }
 									size={ iconSize }
 								/>
-								{ icon.iconName }
+								<p>{ icon.iconName }</p>
 							</div>
-						) ) }
-					</div>
-					{ /* Add more icons here */ }
+						) )
+					) }
 				</div>
 			</Modal>
 		</>
