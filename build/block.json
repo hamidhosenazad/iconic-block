@@ -43,16 +43,28 @@
       "default": "left"
     },
     "label": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
-    "rel": {
-      "type": "string"
+    "url": {
+      "type": "string",
+      "default": ""
+    },
+    "blank": {
+      "type": "boolean",
+      "default": "No"
+    },
+    "linkRel": {
+      "type": "string",
+      "default": ""
     },
     "title": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "htmlAnchor": {
-      "type": "string"
+      "type": "string",
+      "default": ""
     },
     "backgroundColor": {
       "type": "string"
@@ -71,7 +83,16 @@
       "default": "40"
     },
     "selectedIcon": {
-      "type": "string"
+      "type": "string",
+      "default": "EmojiSmile"
+    },
+    "searchInput": {
+      "type": "string",
+      "default": ""
+    },
+    "modalOpen": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -26,6 +26,7 @@ import {
 	__experimentalDimensionControl as DimensionControl, // eslint-disable-line
 	ToolbarButton,
 	ToolbarGroup,
+	RadioControl,
 } from '@wordpress/components';
 
 import * as BootstrapIcons from 'react-bootstrap-icons';
@@ -57,18 +58,21 @@ const customStyles = {
 export default function Edit( { attributes, setAttributes } ) {
 	const {
 		alignment,
+		url,
 		label,
-		rel,
+		linkRel,
 		title,
 		htmlAnchor,
 		backgroundColor,
 		iconColor,
-		rotate,
 		iconSize,
-		modalOpen = false,
+		modalOpen,
 		suggestions = [],
-		selectedIcon = 'EmojiSmile',
+		selectedIcon,
+		searchInput,
+		blank,
 	} = attributes;
+
 	const IconComponent = BootstrapIcons[ selectedIcon ];
 	const setModalOpen = ( newVal ) => {
 		setAttributes( { modalOpen: newVal } );
@@ -76,11 +80,17 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
 	};
+	const onChangeUrl = ( newUrl ) => {
+		setAttributes( { url: newUrl } );
+	};
+	const onChangeBlank = ( newBlank ) => {
+		setAttributes( { blank: newBlank } );
+	};
 	const onChangeLabel = ( newLabel ) => {
 		setAttributes( { label: newLabel } );
 	};
-	const onChangeRel = ( newRel ) => {
-		setAttributes( { rel: newRel } );
+	const onChangeRel = ( newLinkRel ) => {
+		setAttributes( { linkRel: newLinkRel } );
 	};
 	const onChangeTitle = ( newTitle ) => {
 		setAttributes( { title: newTitle } );
@@ -100,9 +110,11 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onSearchInputChange = ( newSearchInput ) => {
 		if ( newSearchInput === '' ) {
 			setAttributes( { suggestions: [] } );
+			setAttributes( { searchInput: newSearchInput } );
 		} else {
 			const filteredIcons = filterBootstrapIcons( newSearchInput );
 			setAttributes( { suggestions: filteredIcons } );
+			setAttributes( { searchInput: newSearchInput } );
 		}
 	};
 
@@ -117,17 +129,38 @@ export default function Edit( { attributes, setAttributes } ) {
 			} ) );
 		return filteredIcons;
 	};
+
 	const onChangeIcon = ( newIcon ) => {
 		setAttributes( { selectedIcon: newIcon } );
 	};
+	if ( suggestions.length === 0 ) {
+		setAttributes( { searchInput: '' } );
+	}
 
 	return (
 		<>
 			<InspectorControls group="settings">
 				<PanelBody title={ __( 'Settings', 'iconic-block' ) }>
 					<TextControl
+						label={ __( 'Url', 'iconic-block' ) }
+						value={ url }
+						onChange={ onChangeUrl }
+						help={ __( '', 'Iconic-block' ) }
+					/>
+
+					<RadioControl
+						label="Open in a new tab?"
+						selected={ blank }
+						options={ [
+							{ label: 'Yes', value: 'Yes' },
+							{ label: 'No', value: 'No' },
+						] }
+						onChange={ ( value ) => onChangeBlank( value ) }
+					/>
+
+					<TextControl
 						label={ __( 'Label', 'iconic-block' ) }
-						value={ label || '' }
+						value={ label }
 						onChange={ onChangeLabel }
 						help={ __(
 							'Briefly describe the icon to help screen reader users.',
@@ -136,8 +169,8 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 
 					<TextControl
-						label={ __( 'REL', 'iconic-block' ) }
-						value={ rel || '' }
+						label={ __( 'Link rel', 'iconic-block' ) }
+						value={ linkRel }
 						onChange={ onChangeRel }
 						help={ __(
 							'Rel attribute for the icon',
@@ -145,8 +178,8 @@ export default function Edit( { attributes, setAttributes } ) {
 						) }
 					/>
 					<TextControl
-						label={ __( 'TITLE', 'iconic-block' ) }
-						value={ title || '' }
+						label={ __( 'Title', 'iconic-block' ) }
+						value={ title }
 						onChange={ onChangeTitle }
 						help={ __(
 							'Describe the role of this icon on the page',
@@ -155,7 +188,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 					<TextControl
 						label={ __( 'HTML ANCHOR', 'iconic-block' ) }
-						value={ htmlAnchor || '' }
+						value={ htmlAnchor }
 						onChange={ onChangeHtmlAnchor }
 						help={ __(
 							'Enter a word or two — without spaces — to make a unique web address just for this block, called an “anchor.” Then, you’ll be able to link directly to this section of your page',
@@ -201,21 +234,6 @@ export default function Edit( { attributes, setAttributes } ) {
 					onChange={ onChangeAlignment }
 				/>
 				<ToolbarGroup>
-					<ToolbarButton
-						name="link"
-						icon="admin-links"
-						title={ __( 'Link', 'icon-block' ) }
-					/>
-				</ToolbarGroup>
-				<ToolbarGroup>
-					<ToolbarButton
-						className={ `outermost-icon-block__rotate-button-${ rotate }` }
-						icon="image-rotate-right"
-						label={ __( 'Rotate', 'icon-block' ) }
-						isPressed={ rotate }
-					/>
-				</ToolbarGroup>
-				<ToolbarGroup>
 					<ToolbarButton onClick={ setModalOpen }>
 						{ __( 'Replace Icon', 'icon-block' ) }
 					</ToolbarButton>
@@ -225,7 +243,6 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ ...useBlockProps( {
 					className: `wp-block-iconic-block wp-block-iconic-block-align-${ alignment }`,
 				} ) }
-				title={ label }
 			>
 				<IconComponent color={ iconColor } size={ iconSize } />
 			</div>
@@ -238,6 +255,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<input
 						type="text"
 						placeholder="Search..."
+						value={ searchInput }
 						onChange={ ( e ) =>
 							onSearchInputChange( e.target.value )
 						}
@@ -278,7 +296,9 @@ export default function Edit( { attributes, setAttributes } ) {
 									flex: '0 0 33.33%',
 									boxSizing: 'border-box',
 									padding: '8px',
+									border: '1px solid #fff',
 								} }
+								className="hover-icon"
 								onClick={ () => {
 									setModalOpen( false );
 									onChangeIcon( icon.iconName );
