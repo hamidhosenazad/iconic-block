@@ -22,13 +22,13 @@
 			"style": true,
 			"width": true,
 			"default": true,
-			"__experimentalSelector": ".icon-container",
+			"__experimentalSelector": ".wp-block-iconic-block",
 			"__experimentalSkipSerialization": true,
 			"__experimentalDefaultControls": {
-				"color": false,
+				"color": true,
 				"radius": false,
-				"style": false,
-				"width": false
+				"style": true,
+				"width": true
 			}
 		}
 	},

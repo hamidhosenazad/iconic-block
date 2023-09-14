@@ -1,15 +1,12 @@
-.wp-block-iconic-block {
+.wp-block-iconic-block-align-right {
+	text-align: right;
+}
 
-	&.wp-block-iconic-block-align-right {
-		text-align: right;
-	}
+.wp-block-iconic-block-align-left {
+	text-align: left;
+}
 
-	&.wp-block-iconic-block-align-left {
-		text-align: left;
-	}
-
-	&.wp-block-iconic-block-align-center {
-		text-align: center !important;
-	}
+.wp-block-iconic-block-align-center {
+	text-align: center !important;
 }
 

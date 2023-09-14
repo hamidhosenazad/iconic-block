@@ -76,6 +76,10 @@ export default function Edit( { attributes, setAttributes } ) {
 	const IconComponent = BootstrapIcons[ selectedIcon ];
 	const setModalOpen = ( newVal ) => {
 		setAttributes( { modalOpen: newVal } );
+		if ( newVal === false ) {
+			setAttributes( { suggestions: [] } );
+			setAttributes( { searchInput: '' } );
+		}
 	};
 	const onChangeAlignment = ( newAlignment ) => {
 		setAttributes( { alignment: newAlignment } );
@@ -133,9 +137,6 @@ export default function Edit( { attributes, setAttributes } ) {
 	const onChangeIcon = ( newIcon ) => {
 		setAttributes( { selectedIcon: newIcon } );
 	};
-	if ( suggestions.length === 0 ) {
-		setAttributes( { searchInput: '' } );
-	}
 
 	return (
 		<>
@@ -226,7 +227,6 @@ export default function Edit( { attributes, setAttributes } ) {
 						backgroundColor={ backgroundColor }
 					/>
 				</PanelColorSettings>
-				<PanelBody></PanelBody>
 			</InspectorControls>
 			<BlockControls>
 				<AlignmentToolbar
